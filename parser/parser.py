@@ -12,6 +12,9 @@ f = open('mariupol-json.json', 'w')
 f.write('{' + '\n')
 f.write("\"features\": [")
 c = 0
+no_damaged = 0
+damaged = 0
+destroyed  = 0
 with open('mariupol.csv', 'r') as file:
     spamreader = csv.reader(file, delimiter=',', quotechar='|')
     for row in spamreader:
@@ -29,6 +32,12 @@ with open('mariupol.csv', 'r') as file:
         f.write("\"title\": \"" + str(c) + "\",")
         c += 1
         f.write("\"description\": \"" + row[4] + "\"")
+        if row[4] == 'Undamaged' or row[4] == 'No Damage':
+            no_damaged += 1
+        elif row[4] == 'Damaged':
+            damaged += 1
+        elif row[4] == 'Destroyed':
+            destroyed += 1
         f.write('\n')
         f.write('},')
         f.write('\n')
@@ -38,3 +47,8 @@ with open('mariupol.csv', 'r') as file:
         f.write("\"type\": \"Point\"")
         f.write("}\n")
         f.write("},")
+
+
+print(f"Damaged: {damaged}")
+print(f"no damage: {no_damaged}")
+print(f"destroyed: {destroyed}")
