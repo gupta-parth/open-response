@@ -94,6 +94,9 @@ const Map = () => {
         ]
         }
         });
+
+        //Add an image to use as a custom marker
+
     });
 
 
